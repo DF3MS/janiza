@@ -83,12 +83,17 @@ def get_device_info(devices):
         if dev[1]=="UMG96S":
             # Hier holen wir die Werte für die Strom und Spannungsumrechnung
             device['transvalues']=get_modbus(client,600,4,address)
+	    # Hier holen wir die Mittelwertszeit für Strom und Leistung.
+            raw_avgtimes=get_modbus(client,57,2,address)
+            avgtimes=[5,10,30,60,300,480,900]
+            device['avg_current'] = avgtimes[raw_avgtimes[0] & 0b11111111 -1]
+            device['avg_power'] = avgtimes[raw_avgtimes[1] & 0b11111111 -1]
             # Hier holen wir die PIN
-            device['pin']=get_modbus(client,11,1,address)
+            device['pin']=get_modbus(client,11,1,address)[0]
             # Just for Fun auch noch die Temp und die Höhe der internen Spannung.
             temp_vint=get_modbus(client,408,2,address)
             device['temp']=temp_vint[0]
-            device['vint']=temp_vint[1]
+            device['vint']=temp_vint[1]/100
             # Hier setzen wir einmal den Maximalstrom für das Display
             device['maxamps']=32
         elif dev[1]=="UMG96RM":
