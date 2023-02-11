@@ -1,12 +1,11 @@
-
 #!/usr/bin/python3
 
 # ----------------------------------------------------- #
 #                                                       #
-# Skript zum Anzeigen von Janiza UMG96 - Logs           #
+# Skript zum Anzeigen von Janitza UMG96 - Logs          #
 # Konfiguration erfolgt am unteren Ende :-)             #
 #                                                       #
-# Bei Fragen: mail-janiza@f50hz.de                      #
+# Bei Fragen: mail-janitza@f50hz.de                     #
 #                                                       #
 # Matthias Schlecht 2022                                #
 #                                                       #

@@ -2,10 +2,10 @@
 
 # ----------------------------------------------------- #
 #                                                       #
-# Skript zum Auslesen von Janiza UMG96                  #
+# Skript zum Auslesen von Janitza UMG96                 #
 # Konfiguration erfolgt am unteren Ende :-)             #
 #                                                       #
-# Bei Fragen: mail-janiza@f50hz.de                      #
+# Bei Fragen: mail-janitza@f50hz.de                     #
 #                                                       #
 # Matthias Schlecht 2022                                #
 #                                                       #
@@ -196,9 +196,9 @@ while True:
     
     # Und los: Einmal eine Methodenaufruf für jedes Janiza. Danach eine kurze Statusausgabe.
     try:
-       logger_UMG96S(client,10,"A010_powerdata.log")
-       #logger_UMG96S(1,"A001_powerdata.log")
-       #logger_UMG96RM(100,"A100_powerdata.log")
+       logger_UMG96S(client,3,"A003_powerdata.log")
+       logger_UMG96S(client,4,"A004_powerdata.log")
+       #logger_UMG96RM(client,100,"A100_powerdata.log")
        
        
        print("Last Log: "+datetime.now().strftime('%H:%M:%S'))
