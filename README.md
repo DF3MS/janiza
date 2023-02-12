@@ -14,3 +14,5 @@ python3 -m venv janitza-venv
 source janitza-venv/bin/activate
 pip3 install -r requirements.txt
 ```
+
+Um den den notwendigen Seriell-Port auch für normale User erreichbar zu machen muss sich der User in der Gruppe `dialout` befinden
