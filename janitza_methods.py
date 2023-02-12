@@ -69,7 +69,7 @@ def search_devices(client,range):
             print("Nothing on Address "+str(address))
     return devices
 
-def get_device_info(devices):
+def get_device_info(client,devices):
     # Nun wollen wir von allen Devices die Eingenschaften haben
     dev_info = {}
     devnum=0
@@ -86,7 +86,7 @@ def get_device_info(devices):
         if dev[1]=="UMG96S":
             # Hier holen wir die Werte für die Strom und Spannungsumrechnung
             device['transvalues']=get_modbus(client,600,4,address)
-	    # Hier holen wir die Mittelwertszeit für Strom und Leistung.
+            # Hier holen wir die Mittelwertszeit für Strom und Leistung.
             raw_avgtimes=get_modbus(client,57,2,address)
             avgtimes=[5,10,30,60,300,480,900]
             device['avg_current'] = avgtimes[raw_avgtimes[0] & 0b11111111 -1]
@@ -98,14 +98,33 @@ def get_device_info(devices):
             device['temp']=temp_vint[0]
             device['vint']=temp_vint[1]/100
             # Hier setzen wir einmal den Maximalstrom für das Display
-            device['maxamps']=32
+            #device['maxamps']=32
         elif dev[1]=="UMG96RM":
+            # Hier holen wir die Werte für die Strom und Spannungsumrechnung
             transvalue=get_modbus(client,10,24,address)
-            device['maxamps']=80
+            transi1h=int(ieee2float(transvalue[0], transvalue[1]))
+            transi1l=int(ieee2float(transvalue[2], transvalue[3]))
+            transu1h=int(ieee2float(transvalue[4], transvalue[5]))
+            transu1l=int(ieee2float(transvalue[6], transvalue[7]))
+            device['transvalue']=[transi1h,transi1l,transu1h,transu1l]
+            # Hier holen wir die Mittelwertszeit für Strom und Leistung.
+            raw_avgtimes=get_modbus(client,40,3,address)
+            avgtimes=[5,10,15,30,60,300,480,600,900]
+            device['avg_current'] = avgtimes[raw_avgtimes[0] & 0b11111111 -1]
+            device['avg_power'] = avgtimes[raw_avgtimes[1] & 0b11111111 -1]
+            device['avg_voltage'] = avgtimes[raw_avgtimes[1] & 0b11111111 -1]
+            # Hier holen wir die PIN
+            device['pin']=get_modbus(client,50,1,address)[0]
+            # 2x Anschlusskonfiguration (siehe Anleitung)
+            device['anschluss_u_509']=get_modbus(client,509,1,address)[0]
+            device['anschluss_i_510']=get_modbus(client,509,1,address)[0]
+            # Hier setzen wir einmal den Maximalstrom für das Display
+            #device['maxamps']=80
+        print(device)
         # Jedes Device-Dict wird in das dev_info-Dict gespeichert
         dev_info[devnum]=device
         devnum +=1
-    print(dev_info)
+#print(dev_info)
 
     
 #----------------------------

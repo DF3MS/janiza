@@ -10,17 +10,14 @@
 #                                                       #
 # ----------------------------------------------------- #
 
-import janitza_methods
+import janitza_methods as jm
 
-client=establish_modbus("/dev/ttyUSB0")
-
-
-# ------------------------------------------------------------------------- #
-#
-#  Ab hier gehts los mit der Konfig.
-#
-# ------------------------------------------------------------------------- #
+#Modbus-Client definieren
+client=jm.establish_modbus("/dev/ttyUSB0",timeout=0.1,baudrate=9600)
 
 # Einmal die Addressrange definiert und los gehts.
 
-get_device_info(search_devices(range(1,20)))
+devices=jm.search_devices(client,range(1,20))
+client.timeout=2
+jm.get_device_info(client,devices)
+
