@@ -1,3 +1,4 @@
 *.log
 janitza-venv
 __pycache__
+*.ls
