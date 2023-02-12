@@ -216,7 +216,7 @@ with Live(lay, refresh_per_second=1) as live:
           # Hier werden die 4 Panels mit Inhalt gefüllt
           #                                filenme             Name             Strom
           lay["UMG1"].update(print_panel("A010_powerdata.log","TEST 16A",16))
-          #lay["UMG2"].update(print_panel("A002_powerdata.log","Benenn Mich 16A",16))
+          lay["UMG2"].update(print_panel("A004_powerdata.log","Benenn Mich 16A",16))
           #lay["UMG3"].update(print_panel("A100_powerdata.log","Benenn Mich 16A",16))
           #lay["UMG4"].update(print_panel("/tmp/testdaten.log","Ton 5A",5))
         

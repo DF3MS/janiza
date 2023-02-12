@@ -72,18 +72,18 @@ def logger_UMG96RM(client,address,filename):
      # Lesen der Registerblöcke
      
      # Frequenz
-     freqr = get_modbus(800,2,address)
+     freqr = get_modbus(client,800,2,address)
      
      # L1,L2,L3, L1-L2, L2-L3, L3-L1
-     valuesU = get_modbus(3530,6,address)
+     valuesU = get_modbus(client,3530,6,address)
 
      # I1, I2, I3, IN(calc), P1,P2,P3,Psum 
-     valuesIP = get_modbus(3916,8,address)
+     valuesIP = get_modbus(client,3916,8,address)
 
      # Cos(phi)
-     valuesCos = get_modbus(3776,4,address)
+     valuesCos = get_modbus(client,3776,4,address)
      # Energie
-     valuesEn  = get_modbus(19060,2,address)
+     valuesEn  = get_modbus(client,19060,2,address)
 
      date = datetime.now().strftime('%Y_%m_%d-%H:%M:%S.%f')
     
@@ -196,9 +196,9 @@ while True:
     
     # Und los: Einmal eine Methodenaufruf für jedes Janiza. Danach eine kurze Statusausgabe.
     try:
-       logger_UMG96S(client,3,"A003_powerdata.log")
+       #logger_UMG96S(client,3,"A003_powerdata.log")
        logger_UMG96S(client,4,"A004_powerdata.log")
-       #logger_UMG96RM(client,100,"A100_powerdata.log")
+       logger_UMG96RM(client,10,"A010_powerdata.log")
        
        
        print("Last Log: "+datetime.now().strftime('%H:%M:%S'))
