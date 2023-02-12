@@ -1,13 +1,7 @@
-Package        Version
--------------- -------
-markdown-it-py 2.1.0
-mdurl          0.1.2
-pip            20.3.4
-pkg-resources  0.0.0
-Pygments       2.14.0
-pymodbus       2.5.3
-pyserial       3.5
-rich           13.3.1
-setuptools     44.1.1
-six            1.16.0
-wheel          0.34.2
+markdown-it-py==2.1.0
+mdurl==0.1.2
+Pygments==2.14.0
+pymodbus==2.5.3
+pyserial==3.5
+rich==13.3.1
+six==1.16.0
